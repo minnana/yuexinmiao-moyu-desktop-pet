@@ -1,0 +1,27 @@
+name: 问题反馈
+description: 反馈动画、键盘、计薪、设置或启动问题
+title: "[问题] "
+body:
+  - type: markdown
+    attributes:
+      value: "感谢反馈！请勿上传真实余额、完整 state.json、密码、令牌或其他私人信息。"
+  - type: input
+    id: environment
+    attributes:
+      label: 使用环境
+      description: Windows 版本、应用版本，以及使用发布包还是自行编译
+      placeholder: Windows 11 x64，v1.0.0，发布包
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 如何复现
+      description: 请写出操作步骤、预期结果和实际结果；截图请先遮盖私人信息。
+    validations:
+      required: true
+  - type: textarea
+    id: settings
+    attributes:
+      label: 相关设置（可选）
+      description: 如涉及计薪，请使用虚构月薪说明上下班、午休、休息日和加班时段。

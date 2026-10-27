@@ -1,0 +1,11 @@
+name: 功能建议
+description: 提出新的桌宠功能或体验改进
+title: "[建议] "
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: 想解决什么问题
+      description: 描述使用场景、希望的效果，以及当前操作遇到的困难。
+    validations:
+      required: true
