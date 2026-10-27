@@ -1,0 +1,48 @@
+name: Windows build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore .\YueXinCat.csproj
+
+      - name: Build
+        run: dotnet build .\YueXinCat.csproj --configuration Release --no-restore
+
+      - name: Publish Windows x64 executable
+        run: .\build_windows.ps1
+
+      - name: Package executable and documentation
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path artifacts/package -Force | Out-Null
+          Copy-Item bin/Release/net8.0-windows/win-x64/publish/YueXinCat.exe artifacts/package/
+          Copy-Item README.md,THIRD_PARTY_NOTICES.md artifacts/package/
+          Compress-Archive -Path artifacts/package/* -DestinationPath artifacts/YueXinCat-win-x64.zip
+
+      - name: Upload Windows package
+        uses: actions/upload-artifact@v7
+        with:
+          name: YueXinCat-win-x64
+          path: artifacts/YueXinCat-win-x64.zip
+          if-no-files-found: error
+          retention-days: 14
