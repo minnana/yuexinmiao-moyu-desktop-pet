@@ -1,0 +1,27 @@
+# .NET / IDE output
+[Bb]in/
+[Oo]bj/
+release/
+artifacts/
+.vs/
+.vscode/
+TestResults/
+*.user
+*.suo
+*.pdb
+
+# Local settings, credentials and signing material
+.env
+.env.*
+!.env.example
+state.json
+state.json.*
+*.pfx
+*.p12
+*.key
+*.log
+*.tmp
+
+# OS files
+Thumbs.db
+.DS_Store

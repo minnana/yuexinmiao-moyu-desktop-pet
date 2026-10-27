@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>x64</Platforms>
+    <AssemblyName>YueXinCat</AssemblyName>
+    <RootNamespace>YueXinCat</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="assets\monthly_cat_normal.png" />
+    <Resource Include="assets\monthly_cat_normal.gif" />
+    <Resource Include="assets\monthly_cat_keyboard.png" />
+    <Resource Include="assets\monthly_cat_keyboard_raised.png" />
+    <Resource Include="assets\monthly_cat_keyboard_down.png" />
+  </ItemGroup>
+</Project>

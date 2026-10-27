@@ -1,0 +1,121 @@
+<Window x:Class="YueXinCat.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="月薪喵 · 收入与排班" Width="470" Height="700"
+        WindowStartupLocation="CenterOwner" Background="#FFFDFD"
+        ResizeMode="NoResize" ShowInTaskbar="False">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI" />
+            <Setter Property="Foreground" Value="#4F4246" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI" />
+            <Setter Property="Foreground" Value="#4F4246" />
+            <Setter Property="Background" Value="#FFF9FB" />
+            <Setter Property="BorderBrush" Value="#EADFE5" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="Margin" Value="0,3,0,7" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI" />
+            <Setter Property="Foreground" Value="#4F4246" />
+            <Setter Property="Background" Value="#FFFDFD" />
+            <Setter Property="BorderBrush" Value="#EADFE5" />
+            <Setter Property="Padding" Value="14,7" />
+            <Setter Property="Margin" Value="6,0,0,0" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style x:Key="SectionTitle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,12,0,4" />
+        </Style>
+        <Style x:Key="Hint" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="#8D7E85" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,0,0,6" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="22,16,22,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="收入与排班" FontSize="22" FontWeight="SemiBold" />
+            <TextBlock Text="把规则告诉月薪喵，它会按实际时间陪你一起算。" Style="{StaticResource Hint}" Margin="0,3,0,2" />
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
+            <StackPanel>
+                <TextBlock Text="余额与月薪" Style="{StaticResource SectionTitle}" />
+                <TextBlock Text="当前余额（支持负数，保存后立即作为新的起算余额）" Style="{StaticResource Hint}" />
+                <TextBox x:Name="BalanceBox" />
+                <TextBlock Text="税前月薪" Style="{StaticResource Hint}" />
+                <TextBox x:Name="SalaryBox" />
+
+                <TextBlock Text="工作日与时间" Style="{StaticResource SectionTitle}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="18" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="每月休息天数" Style="{StaticResource Hint}" />
+                        <TextBox x:Name="RestDaysBox" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="上班开始" Style="{StaticResource Hint}" />
+                        <TextBox x:Name="WorkStartBox" />
+                    </StackPanel>
+                </Grid>
+                <TextBlock Text="上班结束（早于开始时间即视为跨午夜）" Style="{StaticResource Hint}" />
+                <TextBox x:Name="WorkEndBox" />
+                <TextBlock Text="计算口径：当月自然日 − 月休天数 = 工作日；秒薪 = 税前月薪 ÷（工作日 × 每日净工作时长 × 3600）。" Style="{StaticResource Hint}" />
+
+                <TextBlock Text="午休" Style="{StaticResource SectionTitle}" />
+                <CheckBox x:Name="LunchEnabledBox" Content="从计薪时间中扣除午休" Margin="0,2,0,4" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="18" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="午休开始" Style="{StaticResource Hint}" />
+                        <TextBox x:Name="LunchStartBox" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="午休时长（小时）" Style="{StaticResource Hint}" />
+                        <TextBox x:Name="LunchHoursBox" />
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="休息日安排" Style="{StaticResource SectionTitle}" />
+                <TextBlock Text="可填写固定休息日序号或具体日期，逗号分隔，例如：1,2,9 或 2026-10-01。它们只影响当天是否跳动，分母仍按月休天数计算。" Style="{StaticResource Hint}" />
+                <TextBox x:Name="RestDatesBox" />
+
+                <TextBlock Text="加班时段" Style="{StaticResource SectionTitle}" />
+                <TextBlock Text="每行：日期 开始-结束 倍率，例如：2026-10-14 19:00-21:00 1.5；结束早于开始可跨午夜。" Style="{StaticResource Hint}" />
+                <TextBox x:Name="OvertimeBox" Height="72" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" />
+
+                <TextBlock Text="桌宠行为" Style="{StaticResource SectionTitle}" />
+                <TextBlock Text="桌宠大小（40% 到 150%，默认 65%）" Style="{StaticResource Hint}" />
+                <TextBox x:Name="PetSizeBox" />
+                <CheckBox x:Name="KeyboardTrackingBox" Content="跟踪键盘输入，按键时切换为敲键盘动作" Margin="0,2,0,6" />
+                <CheckBox x:Name="StartWithWindowsBox" Content="开机自动启动月薪喵" Margin="0,2,0,10" />
+            </StackPanel>
+        </ScrollViewer>
+        <DockPanel Grid.Row="2" Margin="0,12,0,0">
+            <TextBlock x:Name="ErrorText" Foreground="#C25D71" FontSize="11" TextWrapping="Wrap" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button Content="取消" Click="Cancel_Click" />
+                <Button Content="保存设置" Background="#DFF7ED" BorderBrush="#BDE9D5" Click="Save_Click" />
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
